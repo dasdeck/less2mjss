@@ -22,7 +22,8 @@
 		"js-beautify": "^1.8.6",
 		"less": "2.7.3",
 		"lodash": "^4.17.11",
-		"mjss": "dasdeck/mjss",
+		"mjss": "1.0.0",
+		"mjss-css-utils": "1.0.0",
 		"ts-jest": "^23.1.4",
 		"typescript": "^3.0.3",
 		"typescript-eslint-parser": "^18.0.0"

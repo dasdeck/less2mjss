@@ -7,12 +7,6 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch File",
-            "program": "${file}"
-        },
-        {
-            "type": "node",
-            "request": "launch",
             "name": "Jest All",
             "program": "${workspaceFolder}/node_modules/.bin/jest",
             "args": ["--runInBand"],
@@ -22,16 +16,6 @@
                 "node_modules/**/*.js",
                 "lib/**/*.js"
               ]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Debug Tests",
-            "program": "${workspaceFolder}/test/runners/debug.ts",
-            "console": "integratedTerminal",
-            "runtimeArgs": [
-                "-r", "ts-node/register"
-            ],
         }
     ]
 }

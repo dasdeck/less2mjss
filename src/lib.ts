@@ -8,22 +8,6 @@ export const operatorMap = {
     '/': 'div'
 };
 
-export const nativeFunctions = [
-    'calc',
-    'linear-gradient',
-    'rgba',
-    'url',
-    'blur',
-    'translate',
-    'rotate',
-    'translateY',
-    'translateX',
-    'attr',
-    'scale',
-    'translate3d',
-    'translateZ',
-    'scale3d'
-];
 
 export const customMixinFunctions = {
     'svg-fill'({src, defaultColor, newColor, property = 'background-image'}) {

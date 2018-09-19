@@ -2,8 +2,8 @@ import * as less from 'less';
 import {isArray, mapKeys, forEach, some, size, merge, map, assign} from 'lodash';
 
 import lessFunctions from './lessFunctions';
-import {staticFunctions, nativeFunctions, customMixinFunctions, operatorMap} from './lib';
-
+import {staticFunctions, customMixinFunctions, operatorMap} from './lib';
+import {nativeFunctions} from 'mjss-css-utils';
 
 
 export function patchAST(rootNode, options) {
@@ -192,7 +192,7 @@ export function patchAST(rootNode, options) {
                 } else if (options.expandExpressions) {
                     exp = `${this.operands[0].render(sContext)} ${this.op} ${this.operands[1].render(sContext)}`;
                 } else {
-                    exp = `${func}(${this.operands[0].render(sContext)}, ${this.operands[1].render(sContext)})`;
+                    exp = `call('${func}', ${this.operands[0].render(sContext)}, ${this.operands[1].render(sContext)})`;
                 }
 
                 if (parent.name === 'calc') {
@@ -513,21 +513,28 @@ export function patchAST(rootNode, options) {
                     sContext.customFunction = true;
                     const val = `/${func.name || name}(${node.arguments.map(v => v.value.render(sContext)).join(', ')})/`;
                     mixin.push(val);
+                }
 
-                    const def = context.mixinsRaw[`.${name}`];
-                    const params = {};
-                    // debugger
-                    if (def) {
+                const def = context.mixinsRaw[`.${name}`];
+                const params = {};
+                // debugger
+                if (def && def.params.length) {
 
-                        def.params.forEach((val, index) => {
-                            if (node.arguments[index]) {
-                                params[val.name.substr(1)] = node.arguments[index].value.render(sContext);
-                            }
-                        });
+                    sContext.dynamic = true;
+                    sContext.fullDynamic = true;
+                    sContext.pureStatic = false;
+                    sContext.customFunction = true;
 
-                    }
+                    def.params.forEach((val, index) => {
+                        if (node.arguments[index]) {
+                            params[val.name.substr(1)] = node.arguments[index].value.render(sContext);
+                        }
+                    });
 
-                    const argString = map(params, (val, key) => `'${key}': ${val}`).join(', ');
+                    const escape = (key) => key.includes('-') || true ? `'${key}'` : key;
+
+
+                    const argString = map(params, (val, key) => `${escape(key)}: ${val}`).join(', ');
                     // const args = JSON.stringify().replace(/(:)"|"(,)/g, (res, char) => char).replace(/({|,)(.*?):/g, (res, key,) => `'${key}'`);
                     return {[`/call('${name}', {${argString}})/`]: {}};
 

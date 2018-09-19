@@ -27,7 +27,7 @@ export default {
             jss: {
                 '@env': {
                     'var1': '5px',
-                    'var2': "/mul(10, env('var1'))/"
+                    'var2': "/call('mul', 10, env('var1'))/"
                 }
             }
         },

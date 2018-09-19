@@ -17,7 +17,7 @@ export default {
             less: '.target{color:black;}.extender:extend(.target){color:red;}'
         },
         {
-            desc: 'all extend',
+            desc: 'all extend and nested',
             jss: {
                 '.target': {
                     'color': 'black',
