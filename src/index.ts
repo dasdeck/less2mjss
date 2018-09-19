@@ -784,7 +784,7 @@ export function patchAST(rootNode, options) {
 
 }
 
-export default function less2jss(lessString, options = {skipEmptyRules: true, expandExpressions: false, extractDynamicRules: false}) {
+export function less2mjss(lessString, options = {skipEmptyRules: true, expandExpressions: false, extractDynamicRules: false}) {
 
     let result;
 
@@ -821,3 +821,5 @@ export default function less2jss(lessString, options = {skipEmptyRules: true, ex
     return result;
 
 }
+
+export default less2mjss;

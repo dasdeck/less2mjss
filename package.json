@@ -33,7 +33,8 @@
 			"^.+\\.ts?$": "ts-jest"
 		},
 		"testMatch": [
-			"**/test/runners/bdd.ts"
+			"**/test/runners/bdd.ts",
+			"**/test/*.test.ts"
 		],
 		"moduleFileExtensions": [
 			"ts",

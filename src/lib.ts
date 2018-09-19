@@ -1,5 +1,6 @@
 import lessFunctions from './lessFunctions';
 import {mapKeys} from 'lodash';
+import {UnitNumber} from 'mjss-css-utils';
 
 export const operatorMap = {
     '*': 'mul',
@@ -29,6 +30,8 @@ export const functions = {
     ...customMixinFunctions,
     ...lessFunctions,
     ...mapKeys(lessFunctions, (func, key) => func.name),
+    ...UnitNumber.operations
+
 };
 
 // provide all functions for execution
